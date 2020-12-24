@@ -1,0 +1,24 @@
+body{
+    background-color:teal;
+}
+.card{
+    margin-top: 10%;
+
+    
+}
+.card:hover{
+    
+}
+#todo{
+ border-radius: 8px;
+ border-color: darkorchid;
+ border-width: 2px;
+}
+.head{
+    background-color: peru;
+    text-align: center;
+    
+}
+.head h1{
+    color:whitesmoke
+}

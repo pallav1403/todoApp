@@ -1,0 +1,72 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo App</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="todo.css">
+</head>
+<body>
+    <div class="col d-flex justify-content-center">
+   
+    <div class="card" style="width: 50rem;">
+        <div class="card-header head">
+            <h1>ToDo List</h1>
+          </div>
+        <ul class="list-group list-group-flush" id='pul'>
+        </ul>
+        <div class="card-footer">
+            <form class="form-inline"  id="todoForm">
+                <button type="button" onclick="handleSubmit()" class="btn btn-primary float-right" id="todoBtn" >Add Todo</button>
+                <div class="active-pink-3 active-pink-4 ml-2 " >
+                    <input class="form-control" id="todo" type="text" style="width:30rem;" placeholder="insert tour todo" aria-label="Search">
+                  </div>
+               
+              </form>
+        </div>
+      </div>
+    </div>
+
+<script>
+
+
+ count=0;
+
+function handleSubmit(){
+    if(localStorage.getItem('todoData')){
+        var todoObj = JSON.parse(localStorage.getItem('todoData'))
+    }
+    else{
+        var todoObj={}
+    }
+    const todoData=document.getElementById('todo').value;
+    todoObj[count]=todoData
+    localStorage.setItem('todoData',JSON.stringify(todoObj))
+    count+=1;
+    childb = document.createElement('button')
+    childb.setAttribute('class','btn btn-danger float-right')
+    childb.setAttribute('onclick',`remove(${count})`)
+    childb.innerHTML = 'Delete'
+    child = document.createElement('li')
+    child.innerHTML = todoData
+    child.setAttribute('class','list-group-item')
+    child.id = count
+    child.appendChild(childb)
+    parent = document.getElementById('pul')
+    parent.appendChild(child)
+    console.log("item",todoObj)
+}
+
+function remove(id){
+    ele = document.getElementById(id)
+    ele.setAttribute('style','display:none;')
+}
+</script>
+
+</body>
+</html>
